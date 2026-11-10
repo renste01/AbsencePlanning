@@ -19,8 +19,9 @@ body::before {
   inset: 0;
   z-index: -1;
   opacity: 0.05;
-  background: url("./logo.svg");
+  background: url("Pngs/Business_Esbjerg_2022_weblogo.png");
   background-size: 256px;
+  background-color: #ffffff;
   transform: rotate(-12deg) scale(1.35);
   animation: slide 30s linear infinite;
   pointer-events: none;
