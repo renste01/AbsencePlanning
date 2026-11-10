@@ -36,12 +36,26 @@ body::before {
     background-position: 256px 224px;
   }
 }
-.app {
+.login {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  display: grid;
+  place-items: center;
   text-align: center;
   position: relative;
   z-index: 1;
+}
+
+.login__field {
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.login__alt {
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
 }
 
