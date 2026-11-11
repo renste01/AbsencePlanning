@@ -12,10 +12,10 @@ export function LogIn() {
 
         <form noValidate>
           <label className="login__field" style={{color: COLOURS.text}}>
-            Email
+            Username
             <input
-              type="email"
-              autoComplete="email"
+              type="username"
+              autoComplete="username"
               required
               style={{background: COLOURS.surface,
                 borderColor: COLOURS.border,
@@ -37,13 +37,6 @@ export function LogIn() {
 
           <button className="login__btn" type="submit" style={{color: COLOURS.text}}>Log In</button>
         </form>
-
-        <p className="login__alt" style={{color: COLOURS.text}}>
-          New here?
-          <button type="button" style={{color: COLOURS.text}}>
-            Create an account
-          </button>
-        </p>
       </section>
 
     </main>
