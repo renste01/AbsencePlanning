@@ -25,6 +25,7 @@ public sealed class PasswordHasher
             return false;
         
         //AI helped with the suggestion of using TryFromBase64
+        //Suggestion came because password hashing not working is not crash worthy
         var eSalt = new byte[SaltSize];
         var eHash = new byte[HashSize];
 
