@@ -9,9 +9,6 @@ public class Employee
     public int EmployeeId { get; set; }
 
     [Column, NotNull]
-    public string Email { get; set; } = string.Empty;
-
-    [Column, NotNull]
     public string FirstName { get; set; } = string.Empty;
 
     [Column, NotNull]
