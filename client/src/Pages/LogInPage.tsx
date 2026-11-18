@@ -2,8 +2,51 @@ import { useState, type FormEvent } from "react";
 import "../index.css";
 import {COLOURS} from "@/Colours.tsx";
 
+type LoginProps = {
+    onLogin: (username: string, password: string) => Promise<void>;
+    onSwitchToRegister: () => void;
+};
 
-export function LogIn() {
+export function LogIn({ onLogin, onSwitchToRegister }: LoginProps) 
+{
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [busy, setBusy] = useState(false);
+
+    async function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        setError(null);
+        setBusy(true);
+        try {
+            await onLogin(username.trim(), password);
+        } catch (err) {
+            setError(
+                err instanceof Error && err.message
+                    ? err.message
+                    : "We couldn't sign you in. Check your username and password."
+            );
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function login(username: string, password: string): Promise<string | null> {
+        const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({username, password}),
+        });
+
+        if (!res.ok) return await res.text();
+
+        const auth = await res.json();
+        localStorage.setItem("absencePlanning_user", auth.userName);
+        localStorage.setItem("absencePlanning_user_id", String(auth.id));
+        localStorage.setItem("absencePlanning_token", auth.token);
+        return null;
+    }
+    
   return (
     <main className="login" style={{background: COLOURS.bg}}>
       <section className="login__container">
