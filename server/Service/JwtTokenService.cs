@@ -24,7 +24,8 @@ public class JwtTokenService(IConfiguration configuration)
         {
             new(ClaimTypes.NameIdentifier, user.UserAccountId.ToString()),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Name, user.UserName)
+            new(ClaimTypes.Name, user.UserName),
+            new(ClaimTypes.Role, user.RoleName)
         };
 
         if (user.RoleName == "Admin")

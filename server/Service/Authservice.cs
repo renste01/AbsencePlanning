@@ -25,19 +25,14 @@ public class Authservice(DatabaseConnection db)
 
         IQueryable<UserAccount> users = _db.UserAccounts;
         
-        var emailExists = await users.AnyAsync(
-            u => u.Email == normalizedEmail);
-
-        if (emailExists)
+        if (await users.AnyAsync(
+            u => u.Email == normalizedEmail))
             return null;
         
-        var usernameExists = await users.AnyAsync(
-            u => u.UserName == normalizedUserName);
-
-        if (usernameExists)
+        
+        if (await users.AnyAsync(
+            u => u.UserName == normalizedUserName))
             return null;
-
-        var isFirstUser = !await users.AnyAsync();
 
         var user = new UserAccount()
         {
@@ -48,7 +43,6 @@ public class Authservice(DatabaseConnection db)
         };
 
         user.UserAccountId = await _db.InsertWithInt32IdentityAsync(user);
-        user.EmployeeId = await _db.InsertWithInt32IdentityAsync(user);
         return user;
     }
 

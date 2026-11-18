@@ -24,8 +24,7 @@ public class AuthController : ControllerBase
     public record RegisterRequest(
         [Required, EmailAddress] string Email,
         [Required, MinLength(8)] string Password,
-        [Required, MinLength(1)] string UserName,
-        [Required, MinLength(8)] string Role);
+        [Required, MinLength(1)] string UserName);
 
     public record LoginRequest(
         [Required] string UserName,
@@ -38,15 +37,13 @@ public class AuthController : ControllerBase
         string Token);
 
     [HttpPost("register")]
-    [ProducesResponseType<AuthResponse>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request)
     {
         var user = await _authservice.RegisterAsync(
             request.Email,
             request.Password,
             request.UserName,
-            request.Role);
+            "User");
 
         if (user is null)
             return Conflict("An account with that email already exists.");
@@ -57,12 +54,10 @@ public class AuthController : ControllerBase
             user.UserAccountId,
             user.Email,
             user.UserName,
-            user.RoleName));
+            token));
     }
 
     [HttpPost("login")]
-    [ProducesResponseType<AuthResponse>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<AuthResponse>> Login(LoginRequest request)
     {
         var user = await _authservice.LoginAsync(
@@ -70,7 +65,7 @@ public class AuthController : ControllerBase
             request.Password);
         
         if (user is null)
-            return Unauthorized("Invalid email or password.");
+            return Unauthorized("Invalid username or password.");
 
         var token = _jwttokenservice.CreateToken(user);
         
@@ -78,6 +73,6 @@ public class AuthController : ControllerBase
             user.UserAccountId,
             user.Email,
             user.UserName,
-            user.RoleName));
+            token));
     }
 }
