@@ -59,3 +59,346 @@ body::before {
   text-align: left;
 }
 
+
+/* ==========================================================================
+   MAIN PAGE (forsiden)
+   Farver sættes i MainPage.tsx via BE_COLOURS - her er kun layout og form.
+   Sektioner: Skal · Sidebar · Topmenu · Overskrift · Kort · Popup · Fokus · Mobil
+   ========================================================================== */
+
+/* --- Skal: dækker hele skærmen, så body-baggrunden ikke ses --- */
+.mp {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  overflow: auto;
+  font-size: 15px;
+}
+
+.mp,
+.mp *,
+.mp *::before,
+.mp *::after {
+  box-sizing: border-box;
+}
+
+.mp a {
+  text-decoration: none;
+}
+
+.mp__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* --- Sidebar --- */
+.mp__side {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  border-right: 1px solid;
+  transition: width 0.15s;
+}
+
+.mp__side-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.mp__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.mp__collapse {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.mp__sidelink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+/* Minimeret sidebar: kun ikoner, og knappen ligger under logoet */
+.mp__side--collapsed {
+  width: 70px;
+}
+
+.mp__side--collapsed .mp__sidelink span {
+  display: none;
+}
+
+.mp__side--collapsed .mp__side-top {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mp__side--collapsed .mp__collapse svg {
+  transform: rotate(180deg);
+}
+
+
+/* --- Topmenu --- */
+.mp__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid;
+}
+
+.mp__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mp__links > a,
+.mp__dd summary {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.mp__right {
+  display: flex;
+  gap: 8px;
+}
+
+.mp__chip {
+  padding: 7px 12px;
+  border: 1px solid;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+}
+
+button.mp__chip {
+  cursor: pointer;
+}
+
+/* Rullemenu (Registreringer) */
+.mp__dd {
+  position: relative;
+}
+
+.mp__dd summary::-webkit-details-marker {
+  display: none;
+}
+
+.mp__dd > div {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+  min-width: 150px;
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 48, 90, 0.15);
+}
+
+.mp__dd > div a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+
+/* --- Overskrift --- */
+.mp__head {
+  border-bottom: 1px solid;
+}
+
+.mp__head-in {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mp__head h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.mp__head p {
+  margin: 2px 0 0;
+  font-size: 14px;
+}
+
+.mp__brand {
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.mp__brand b {
+  font-weight: 800;
+}
+
+.mp__intro {
+  margin-left: auto !important;
+  max-width: 340px;
+  text-align: right;
+  font-size: 13px !important;
+}
+
+
+/* --- Kort --- */
+.mp__grid {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 32px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-content: start;
+}
+
+.mp__tile {
+  min-height: 220px;
+  padding: 24px;
+  border: 1px solid;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 48, 90, 0.1);
+}
+
+.mp__tile:hover {
+  box-shadow: 0 4px 14px rgba(0, 48, 90, 0.16);
+}
+
+.mp__tile-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mp__tile-sub {
+  font-size: 13px;
+}
+
+
+/* --- Popup (Mine anmodninger) --- */
+.mp__dialog {
+  width: min(520px, 92vw);
+  padding: 24px;
+  border: 1px solid;
+  border-radius: 12px;
+}
+
+.mp__dialog::backdrop {
+  background: rgba(0, 48, 90, 0.45);
+}
+
+.mp__dialog-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mp__dialog-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.mp__list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.mp__list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid;
+}
+
+.mp__status {
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+/* --- Tastaturfokus --- */
+.mp a:focus-visible,
+.mp button:focus-visible,
+.mp summary:focus-visible {
+  outline: 2px solid #c8592f;
+  outline-offset: 2px;
+}
+
+
+/* --- Mobil --- */
+@media (max-width: 800px) {
+  .mp__side {
+    display: none;
+  }
+
+  .mp__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mp__nav,
+  .mp__head-in {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mp__intro {
+    margin-left: 0 !important;
+    text-align: left;
+  }
+}
