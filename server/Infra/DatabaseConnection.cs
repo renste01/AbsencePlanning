@@ -13,7 +13,6 @@ public class DatabaseConnection : DataConnection
 
     public ITable<Employee> Employees => this.GetTable<Employee>();
     public ITable<HolidayRule> HolidayRules => this.GetTable<HolidayRule>();
-    public ITable<Role> Roles => this.GetTable<Role>();
     public ITable<UserAccount> UserAccounts => this.GetTable<UserAccount>();
     public ITable<VacationBalance> VacationBalances => this.GetTable<VacationBalance>();
     public ITable<PublicHoliday> PublicHolidays => this.GetTable<PublicHoliday>();

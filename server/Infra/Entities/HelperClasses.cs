@@ -14,3 +14,10 @@ public static class RequestStatuses
     public const string CancellationRequested = "CancellationRequested";
     public const string Cancelled = "Cancelled";
 }
+
+public static class Roles
+{
+    public const string Employee = "Employee";
+    public const string Accountant = "Accountant";
+    public const string SystemOwner = "SystemOwner";
+}

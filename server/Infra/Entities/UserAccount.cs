@@ -2,6 +2,7 @@
 
 namespace Infra.Entities;
 
+
 [Table("UserAccount")]
 public class UserAccount
 {
@@ -10,9 +11,9 @@ public class UserAccount
 
     [Column, NotNull]
     public int EmployeeId { get; set; }
-
+    
     [Column, NotNull]
-    public int RoleId { get; set; }
+    public string RoleName { get; set; } = Roles.Employee;
 
     [Column, NotNull]
     public string Email { get; set; } = string.Empty;
@@ -22,7 +23,5 @@ public class UserAccount
 
     [Association(ThisKey = nameof(EmployeeId), OtherKey = nameof(Employee.EmployeeId))]
     public Employee? Employee { get; set; }
-
-    [Association(ThisKey = nameof(RoleId), OtherKey = nameof(Role.RoleId))]
-    public Role? Role { get; set; }
+    
 }
