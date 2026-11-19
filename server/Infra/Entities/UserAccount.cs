@@ -18,6 +18,9 @@ public class UserAccount
     [Column, NotNull]
     public string Email { get; set; } = string.Empty;
 
+    [Column, NotNull] 
+    public string UserName { get; set; } = string.Empty;
+
     [Column, NotNull]
     public string PasswordHash { get; set; } = string.Empty;
 

@@ -20,7 +20,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.2;
   background: url("Pngs/Business_Esbjerg_2022_weblogo.png");
   background-size: 256px;
   background-color: #ffffff;

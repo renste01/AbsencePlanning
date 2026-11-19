@@ -9,6 +9,7 @@
     <PackageReference Include="Facet.Extensions" Version="6.7.0" />
     <PackageReference Include="linq2db.PostgreSQL" Version="6.5.1" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
   </ItemGroup>
 
   <PropertyGroup>
