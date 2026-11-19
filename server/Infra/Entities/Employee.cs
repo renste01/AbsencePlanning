@@ -5,35 +5,25 @@ namespace Infra.Entities;
 [Table("Employee")]
 public class Employee
 {
-    [PrimaryKey, Identity]
-    public int EmployeeId { get; set; }
+    [PrimaryKey, Identity] public int EmployeeId { get; set; }
 
-    [Column, NotNull]
-    public string FirstName { get; set; } = string.Empty;
+    [Column, NotNull] public string FirstName { get; set; } = string.Empty;
 
-    [Column, NotNull]
-    public string LastName { get; set; } = string.Empty;
+    [Column, NotNull] public string LastName { get; set; } = string.Empty;
 
-    [Column]
-    public string? Address { get; set; }
+    [Column] public string? Address { get; set; }
 
-    [Column]
-    public string? PostalCode { get; set; }
+    [Column] public string? PostalCode { get; set; }
 
-    [Column]
-    public string? City { get; set; }
+    [Column] public string? City { get; set; }
 
-    [Column]
-    public string? Country { get; set; }
+    [Column] public string? Country { get; set; }
 
-    [Column]
-    public string? PhoneNumber { get; set; }
+    [Column] public string? PhoneNumber { get; set; }
 
-    [Column, NotNull]
-    public DateOnly EmployeeStartDate { get; set; }
+    [Column, NotNull] public DateOnly EmployeeStartDate { get; set; }
 
-    [Column]
-    public DateOnly? EmployeeEndDate { get; set; }
+    [Column] public DateOnly? EmployeeEndDate { get; set; }
 
     [Association(ThisKey = nameof(EmployeeId), OtherKey = nameof(UserAccount.EmployeeId))]
     public List<UserAccount> UserAccounts { get; set; } = new();
