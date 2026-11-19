@@ -7,9 +7,11 @@
 
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router";
 import { LogIn } from "./Pages/LogInPage.tsx";
 import { MainPage } from "./Pages/MainPage.tsx";
-import { login } from "./auth.ts"; // adjust to wherever you put the login function
+import { RequestVacationPage } from "./Pages/RequestVacationPage.tsx";
+import { login } from "./auth.ts";
 
 function Root() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -19,15 +21,22 @@ function Root() {
         setLoggedIn(true);               // only reached when login succeeded
     }
 
-    if (loggedIn) {
-        return <MainPage />;
+    if (!loggedIn) {
+        return (
+            <LogIn
+                onLogin={handleLogin}
+                onSwitchToRegister={() => {}} // fill in when you add a register screen
+            />
+        );
     }
 
     return (
-        <LogIn
-            onLogin={handleLogin}
-            onSwitchToRegister={() => {}} // fill in when you add a register screen
-        />
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/anmod-ferie" element={<RequestVacationPage />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
