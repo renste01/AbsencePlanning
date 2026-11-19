@@ -507,3 +507,62 @@ button.mp__chip {
     grid-template-columns: 1fr;
   }
 }
+.mp__card--wide {
+  grid-column: 1 / -1;
+}
+
+.mp__stat {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.mp__stat strong {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.mp__period {
+  display: grid;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid;
+}
+
+.mp__period h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mp__note {
+  margin: 0;
+  font-size: 13px;
+}
+
+.mp__projection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mp__result {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.mp__result strong {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+@media (max-width: 800px) {
+  .mp__projection {
+    grid-template-columns: 1fr;
+  }
+}
