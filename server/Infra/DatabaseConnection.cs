@@ -16,7 +16,10 @@ public class DatabaseConnection : DataConnection
     public ITable<UserAccount> UserAccounts => this.GetTable<UserAccount>();
     public ITable<VacationBalance> VacationBalances => this.GetTable<VacationBalance>();
     public ITable<PublicHoliday> PublicHolidays => this.GetTable<PublicHoliday>();
-    public ITable<VacationCancellationRequest> VacationCancellationRequests => this.GetTable<VacationCancellationRequest>();
+
+    public ITable<VacationCancellationRequest> VacationCancellationRequests =>
+        this.GetTable<VacationCancellationRequest>();
+
     public ITable<VacationRequest> VacationRequests => this.GetTable<VacationRequest>();
     public ITable<VacationRequestDay> VacationRequestDays => this.GetTable<VacationRequestDay>();
     public ITable<VacationTransaction> VacationTransactions => this.GetTable<VacationTransaction>();

@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Facet" Version="6.7.0" />
-    <PackageReference Include="Facet.Extensions" Version="6.7.0" />
-    <PackageReference Include="linq2db.EntityFrameworkCore" Version="10.7.0" />
-    <PackageReference Include="linq2db.PostgreSQL" Version="6.5.1" />
-    <PackageReference Include="Npgsql" Version="10.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Facet" Version="6.7.0" />
+        <PackageReference Include="Facet.Extensions" Version="6.7.0" />
+        <PackageReference Include="linq2db.EntityFrameworkCore" Version="10.7.0" />
+        <PackageReference Include="linq2db.PostgreSQL" Version="6.5.1" />
+        <PackageReference Include="Npgsql" Version="10.0.3" />
+    </ItemGroup>
 
 </Project>
