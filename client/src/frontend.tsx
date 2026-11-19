@@ -7,14 +7,22 @@
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { LogIn } from "./Pages/LogInPage.tsx";
-import { MainPage} from "./Pages/MainPage.tsx";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { MainPage } from "./Pages/MainPage.tsx";
+import { RequestVacationPage } from "./Pages/RequestVacationPage.tsx";
+import { VacationBalancePage } from "./Pages/VacationBalancePage.tsx";
 
 const elem = document.getElementById("root")!;
 const app = (
-  <StrictMode>
-    <MainPage />
-  </StrictMode>
+    <StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/anmod-ferie" element={<RequestVacationPage />} />
+                <Route path="/feriesaldo" element={<VacationBalancePage />} />
+            </Routes>
+        </BrowserRouter>
+    </StrictMode>
 );
 
 // https://bun.com/docs/bundler/hot-reloading#import-meta-hot-data
