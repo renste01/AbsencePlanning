@@ -11,4 +11,7 @@ var app = builder.Build();
 app.MapGet("/db-test", (DatabaseConnection db) => $"Forbindelse OK. Employees: {db.Employees.Count()}");
 // app.MapGet("/", () => "Hello World!");
 
+app.MapGet("/api/calendar", async (DateOnly fromDate, DateOnly toDate, CalendarRepository repo) =>
+    await repo.GetEventsAsync(fromDate, toDate));
+
 app.Run();
