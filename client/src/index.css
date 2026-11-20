@@ -20,7 +20,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0.5;
   background: url("Pngs/Business_Esbjerg_2022_weblogo.png");
   background-size: 256px;
   background-color: #ffffff;
@@ -506,4 +506,117 @@ button.mp__chip {
   .mp__row {
     grid-template-columns: 1fr;
   }
+}
+.mp__card--wide {
+  grid-column: 1 / -1;
+}
+
+.mp__stat {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.mp__stat strong {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.mp__period {
+  display: grid;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid;
+}
+
+.mp__period h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mp__note {
+  margin: 0;
+  font-size: 13px;
+}
+
+.mp__projection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mp__result {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.mp__result strong {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+@media (max-width: 800px) {
+  .mp__projection {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mp__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mp__toolbar .mp__field {
+  min-width: 220px;
+}
+
+.mp__tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.mp__field textarea {
+  padding: 9px 12px;
+  border: 1px solid;
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+}
+
+.mp textarea:focus-visible {
+  outline: 2px solid #c8592f;
+  outline-offset: 2px;
+}
+
+.mp__req-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mp__badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mp__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.mp__actions .mp__btn {
+  flex: 1;
 }

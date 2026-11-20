@@ -6,6 +6,7 @@ type PageShellProps = {
     title: string;
     subtitle: string;
     intro: string;
+    activeNav?: "ferie" | "feriesaldo" | null;
     children: ReactNode;
 };
 
@@ -22,11 +23,13 @@ const CalIcon = (p: { size?: number; stroke?: number }) => <Icon {...p}><rect x=
 const ClockIcon = (p: { size?: number; stroke?: number }) => <Icon {...p}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></Icon>;
 const HelpIcon = (p: { size?: number }) => <Icon {...p}><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 17h.01" /></Icon>;
 
-export function PageShell({ title, subtitle, intro, children }: PageShellProps) {
+export function PageShell({ title, subtitle, intro, activeNav = "ferie", children }: PageShellProps) {
     const company = "Din virksomhed";
     const [collapsed, setCollapsed] = useState(false);
 
     const c = COLOURS;
+    const side = (key: "ferie" | "feriesaldo") =>
+        activeNav === key ? { background: c.accentSoft, color: c.accent } : { color: c.text };
     const chip = { background: c.bg, borderColor: c.border, color: c.text };
 
     return (
@@ -41,8 +44,8 @@ export function PageShell({ title, subtitle, intro, children }: PageShellProps) 
                         </button>
                     </div>
                     <a className="mp__sidelink" href="/profil" style={{ color: c.text }}><UserIcon size={18} /><span>Min konto</span></a>
-                    <a className="mp__sidelink" href="/ferie" style={{ background: c.accentSoft, color: c.accent }}><CalIcon size={18} /><span>Ferie</span></a>
-                    <a className="mp__sidelink" href="/feriesaldo" style={{ color: c.text }}><ClockIcon size={18} /><span>Feriesaldo</span></a>
+                    <a className="mp__sidelink" href="/ferie" style={side("ferie")}><CalIcon size={18} /><span>Ferie</span></a>
+                    <a className="mp__sidelink" href="/feriesaldo" style={side("feriesaldo")}><ClockIcon size={18} /><span>Feriesaldo</span></a>
                 </div>
                 <a className="mp__sidelink" href="/hjaelp" style={{ color: c.text }}><HelpIcon size={18} /><span>Hjælp</span></a>
             </aside>
