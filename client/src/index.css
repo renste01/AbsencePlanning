@@ -507,6 +507,121 @@ button.mp__chip {
     grid-template-columns: 1fr;
   }
 }
+/* ==========================================================================
+  FÆLLES KALENDER //AI
+  ========================================================================== */
+.cal {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 32px 60px;
+}
+
+.cal__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.cal__month,
+.cal__year {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.cal__nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--cal-border);
+  border-left: 1px solid var(--cal-border);
+  transition: opacity 0.15s;
+}
+
+.cal__dayname {
+  padding: 8px 10px;
+  border-right: 1px solid var(--cal-border);
+  border-bottom: 1px solid var(--cal-border);
+  font-size: 20px;
+}
+
+.cal__cell {
+  position: relative;
+  min-height: 110px;
+  padding: 6px 8px;
+  border-right: 1px solid var(--cal-border);
+  border-bottom: 1px solid var(--cal-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.cal__num {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.cal__week {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 10px;
+}
+
+.cal__ev {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal__more {
+  font-size: 11px;
+}
+
+@media (max-width: 800px) {
+  .cal {
+    padding: 16px 8px 40px;
+  }
+
+  .cal__month,
+  .cal__year {
+    font-size: 28px;
+  }
+
+  .cal__dayname {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .cal__cell {
+    min-height: 70px;
+    padding: 4px;
+  }
+
+  .cal__num {
+    font-size: 14px;
+  }
+
+  .cal__ev {
+    font-size: 10px;
+    padding: 1px 3px;
+  }
+}
 .mp__card--wide {
   grid-column: 1 / -1;
 }
