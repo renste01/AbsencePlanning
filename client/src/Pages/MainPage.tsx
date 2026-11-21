@@ -1,6 +1,7 @@
 ﻿import { useRef, useState, type ReactNode } from "react";
 import { BE_COLOURS as COLOURS } from "@/Colours.tsx";
 import "../index.css";
+import { Link } from "react-router";
 
 type VacationRequest = {
     id: number;
@@ -108,11 +109,11 @@ export function MainPage() {
                         <span className="mp__tile-sub" style={{ color: c.muted }}>Se status på dine ferieanmodninger</span>
                     </button>
 
-                    <a href="/kalender" className="mp__tile" style={tile}>
+                    <Link to="/kalender" className="mp__tile" style={tile}>
                         <span style={{ color: c.primary }}><CalIcon size={52} stroke={0.9} /></span>
                         <span className="mp__tile-title">Fælles kalender</span>
                         <span className="mp__tile-sub" style={{ color: c.muted }}>Se hvem der har ferie og fravær</span>
-                    </a>
+                    </Link>
 
                     <a href="/ferie" className="mp__tile" style={tile}>
                         <span style={{ color: c.primary }}><PlaneIcon size={52} stroke={0.9} /></span>

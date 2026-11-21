@@ -15,6 +15,7 @@ import { RequestVacationPage } from "./Pages/RequestVacationPage.tsx";
 import { VacationBalancePage } from "./Pages/VacationBalancePage.tsx";
 import { login } from "./auth.ts";
 import { ApproveRequestsPage } from "./Pages/ApproveRequestsPage.tsx";
+import { CalendarPage } from "./Pages/CalendarPage.tsx";
 
 function Root() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -40,6 +41,7 @@ function Root() {
                 <Route path="/anmod-ferie" element={<RequestVacationPage />} />
                 <Route path="/godkend-anmodninger" element={<ApproveRequestsPage />} />
                 <Route path="/feriesaldo" element={<VacationBalancePage />} />
+                <Route path="/kalender" element={<CalendarPage />} />
             </Routes>
         </BrowserRouter>
     );
