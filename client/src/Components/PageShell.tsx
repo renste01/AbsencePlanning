@@ -6,7 +6,7 @@ type PageShellProps = {
     title: string;
     subtitle: string;
     intro: string;
-    activeNav?: "ferie" | "feriesaldo";
+    activeNav?: "ferie" | "feriesaldo" | null;
     children: ReactNode;
 };
 

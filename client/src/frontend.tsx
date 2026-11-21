@@ -14,6 +14,7 @@ import { MainPage } from "./Pages/MainPage.tsx";
 import { RequestVacationPage } from "./Pages/RequestVacationPage.tsx";
 import { VacationBalancePage } from "./Pages/VacationBalancePage.tsx";
 import { login } from "./auth.ts";
+import { ApproveRequestsPage } from "./Pages/ApproveRequestsPage.tsx";
 
 function Root() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -37,6 +38,7 @@ function Root() {
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/anmod-ferie" element={<RequestVacationPage />} />
+                <Route path="/godkend-anmodninger" element={<ApproveRequestsPage />} />
                 <Route path="/feriesaldo" element={<VacationBalancePage />} />
             </Routes>
         </BrowserRouter>
