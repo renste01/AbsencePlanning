@@ -89,23 +89,7 @@ public static class VacationBalanceCalculator
 
         foreach (var type in AccountTypes)
         {
-            var projected = 0m;
-            var expiring = 0m;
-
-            foreach (var period in periods.Where(p => p.Balance.HolidayType == type))
-            {
-                var remaining = period.RemainingHours;
-
-                if (period.UsableTo < target)
-                {
-                    expiring += Math.Max(0m, remaining);
-                    continue;
-                }
-
-                if (target < period.UsableFrom) continue;
-
-                projected += remaining + AccruedBetween(period.Balance, type, today, target, rules, schedules);
-            }
+            var (projected, expiring) = ProjectAccount(type, periods, today, target, rules, schedules);
 
             var days = projected > 0 && averageDayHours > 0
                 ? (int)Math.Floor(projected / averageDayHours)
@@ -121,6 +105,19 @@ public static class VacationBalanceCalculator
         }
 
         return result;
+    }
+
+    public static decimal ProjectedAvailableHours(
+        string holidayType,
+        DateOnly today,
+        DateOnly target,
+        IReadOnlyList<VacationBalance> balances,
+        IReadOnlyList<PlannedVacationDay> plannedDays,
+        IReadOnlyList<HolidayRule> rules,
+        IReadOnlyList<EmployeeSchedule> schedules)
+    {
+        var periods = BuildPeriods(balances, plannedDays);
+        return ProjectAccount(holidayType, periods, today, target, rules, schedules).Projected;
     }
 
     public static DateOnly UsableFrom(VacationBalance balance)
@@ -139,19 +136,36 @@ public static class VacationBalanceCalculator
 
     public static decimal WeeklyHours(IReadOnlyList<EmployeeSchedule> schedules, DateOnly date)
     {
-        var active = schedules
-            .Where(s => s.StartDate <= date && (s.EndDate == null || s.EndDate >= date))
-            .OrderByDescending(s => s.StartDate)
-            .FirstOrDefault();
+        return WorkScheduleCalculator.WeeklyHours(schedules, date);
+    }
 
-        if (active is null) return 0m;
+    private static (decimal Projected, decimal Expiring) ProjectAccount(
+        string type,
+        IReadOnlyList<PeriodState> periods,
+        DateOnly today,
+        DateOnly target,
+        IReadOnlyList<HolidayRule> rules,
+        IReadOnlyList<EmployeeSchedule> schedules)
+    {
+        var projected = 0m;
+        var expiring = 0m;
 
-        var schedule = active.Schedule;
-        return DayHours(schedule.MondayFrom, schedule.MondayTo)
-               + DayHours(schedule.TuesdayFrom, schedule.TuesdayTo)
-               + DayHours(schedule.WednesdayFrom, schedule.WednesdayTo)
-               + DayHours(schedule.ThursdayFrom, schedule.ThursdayTo)
-               + DayHours(schedule.FridayFrom, schedule.FridayTo);
+        foreach (var period in periods.Where(p => p.Balance.HolidayType == type))
+        {
+            var remaining = period.RemainingHours;
+
+            if (period.UsableTo < target)
+            {
+                expiring += Math.Max(0m, remaining);
+                continue;
+            }
+
+            if (target < period.UsableFrom) continue;
+
+            projected += remaining + AccruedBetween(period.Balance, type, today, target, rules, schedules);
+        }
+
+        return (projected, expiring);
     }
 
     private static List<PeriodState> BuildPeriods(
@@ -234,12 +248,6 @@ public static class VacationBalanceCalculator
             return rule.AccrualAmount * weeklyHours / FullTimeWeeklyHours;
 
         return 0m;
-    }
-
-    private static decimal DayHours(TimeOnly? from, TimeOnly? to)
-    {
-        if (from is null || to is null || to.Value <= from.Value) return 0m;
-        return (decimal)(to.Value - from.Value).TotalHours;
     }
 
     private static decimal Round(decimal value)
