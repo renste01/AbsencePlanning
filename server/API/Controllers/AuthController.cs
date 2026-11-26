@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Infra.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -22,6 +23,8 @@ public class AuthController : ControllerBase
     }
 
     public record RegisterRequest(
+        [Required, MinLength(1)] string FirstName,
+        [Required, MinLength(1)] string LastName,
         [Required, EmailAddress] string Email,
         [Required, MinLength(8)] string Password,
         [Required, MinLength(1)] string UserName);
@@ -40,13 +43,14 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request)
     {
         var user = await _authservice.RegisterAsync(
+            request.FirstName,
+            request.LastName,
             request.Email,
             request.Password,
-            request.UserName,
-            "User");
+            request.UserName);
 
         if (user is null)
-            return Conflict("An account with that email already exists.");
+            return Conflict("An account with that email or username already exists.");
 
         var token = _jwttokenservice.CreateToken(user);
 

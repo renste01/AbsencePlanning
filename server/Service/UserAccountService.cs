@@ -29,7 +29,7 @@ public class UserAccountService(DatabaseConnection db)
         string password)
     {
         var normalizedEmail = email.Trim().ToLowerInvariant();
-        var normalizedUserName = userName.Trim();
+        var normalizedUserName = userName.Trim().ToLowerInvariant();
 
         IQueryable<UserAccount> users = _db.UserAccounts;
 
@@ -66,7 +66,7 @@ public class UserAccountService(DatabaseConnection db)
             return null;
 
         var normalizedEmail = email.Trim().ToLowerInvariant();
-        var normalizedUserName = userName.Trim();
+        var normalizedUserName = userName.Trim().ToLowerInvariant();
 
         IQueryable<UserAccount> users = _db.UserAccounts;
 

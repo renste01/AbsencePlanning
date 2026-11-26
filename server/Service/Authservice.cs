@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Infra;
+﻿using Infra;
 using Infra.Entities;
 using LinqToDB;
 using LinqToDB.Async;
@@ -14,13 +13,14 @@ public class Authservice(DatabaseConnection db)
     //method for registering a user, it checks for email, username, password and role.
     //it also checks if the email or username has been used before
     public async Task<UserAccount?> RegisterAsync(
+        string firstName,
+        string lastName,
         string email, 
         string password, 
-        string userName,
-        string role)
+        string userName)
     {
         var normalizedEmail = email.Trim().ToLowerInvariant();
-        var normalizedUserName = userName.Trim();
+        var normalizedUserName = userName.Trim().ToLowerInvariant();
         var hasher = new PasswordHasher();
 
         IQueryable<UserAccount> users = _db.UserAccounts;
@@ -33,16 +33,28 @@ public class Authservice(DatabaseConnection db)
         if (await users.AnyAsync(
             u => u.UserName == normalizedUserName))
             return null;
+// Creates a transaction, so either all gets send or nothing
+        using var transaction = _db.BeginTransaction();
+
+        var employee = new Employee
+        {
+            FirstName = firstName.Trim(),
+            LastName = lastName.Trim(),
+            EmployeeStartDate = DateOnly.FromDateTime(DateTime.Today)
+        };
+        employee.EmployeeId = await _db.InsertWithInt32IdentityAsync(employee);
 
         var user = new UserAccount()
         {
+            EmployeeId = employee.EmployeeId,
             Email = normalizedEmail,
-            UserName = normalizedEmail,
+            UserName = normalizedUserName,
             PasswordHash = hasher.Hash(password),
-            RoleName = role
+            RoleName = Roles.Employee
         };
 
         user.UserAccountId = await _db.InsertWithInt32IdentityAsync(user);
+        transaction.Commit();
         return user;
     }
 

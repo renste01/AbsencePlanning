@@ -73,6 +73,13 @@ export function LogIn({ onLogin, onSwitchToRegister }: LoginProps)
           
           </button>
         </form>
+        <button
+          type="button"
+          onClick={onSwitchToRegister}
+          style={{ background: c.surface, borderColor: c.border, color: c.text }}
+        >
+          Register
+        </button>
       </section>
 
     </main>
