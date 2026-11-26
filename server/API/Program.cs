@@ -11,6 +11,8 @@ builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddScoped<CalendarRepository>();
 builder.Services.AddScoped<VacationBalanceRepository>();
 builder.Services.AddScoped<VacationBalanceService>();
+builder.Services.AddScoped<VacationRequestRepository>();
+builder.Services.AddScoped<VacationRequestService>();
 
 var app = builder.Build();
 
@@ -21,5 +23,6 @@ app.MapGet("/api/calendar", async (DateOnly fromDate, DateOnly toDate, CalendarR
     await repo.GetEventsAsync(fromDate, toDate));
 
 app.MapVacationBalanceEndpoints();
+app.MapVacationRequestEndpoints();
 
 app.Run();
