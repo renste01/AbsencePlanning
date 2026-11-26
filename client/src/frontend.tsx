@@ -18,7 +18,11 @@ import { ApproveRequestsPage } from "./Pages/ApproveRequestsPage.tsx";
 import { CalendarPage } from "./Pages/CalendarPage.tsx";
 
 function Root() {
-    const [loggedIn, setLoggedIn] = useState(false);
+    
+    //change this back to usestate(false) later
+    const [loggedIn, setLoggedIn] = useState(
+        () => localStorage.getItem("absencePlanning_token") !== null
+    );
 
     async function handleLogin(username: string, password: string) {
         await login(username, password);
