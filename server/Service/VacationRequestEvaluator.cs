@@ -80,10 +80,8 @@ public static class VacationRequestEvaluator
 
         if (request.HolidayType == HolidayTypes.Weeks1To5)
         {
-            result.IsMainHoliday = counted.Count >= MainHolidayDays
-                                   && InMainWindow(request.StartDate)
-                                   && InMainWindow(request.EndDate);
-            result.NoticeMonths = result.IsMainHoliday ? MainHolidayNoticeMonths : OtherHolidayNoticeMonths;
+            result.IsMainHoliday = IsMainHoliday(counted.Count, request.StartDate, request.EndDate);
+            result.NoticeMonths = NoticeMonthsFor(request.HolidayType, result.IsMainHoliday);
 
             if (request.StartDate < today.AddMonths(result.NoticeMonths))
                 AddIssue(result, VacationRequestIssueCodes.NoticeTooShort, "startDate",
@@ -164,6 +162,17 @@ public static class VacationRequestEvaluator
         }
 
         return missingSchedule;
+    }
+
+    public static bool IsMainHoliday(int countedDays, DateOnly start, DateOnly end)
+    {
+        return countedDays >= MainHolidayDays && InMainWindow(start) && InMainWindow(end);
+    }
+
+    public static int NoticeMonthsFor(string holidayType, bool isMainHoliday)
+    {
+        if (holidayType != HolidayTypes.Weeks1To5) return 0;
+        return isMainHoliday ? MainHolidayNoticeMonths : OtherHolidayNoticeMonths;
     }
 
     private static bool InMainWindow(DateOnly date)

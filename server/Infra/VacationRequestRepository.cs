@@ -31,6 +31,7 @@ public class VacationRequestRepository(DatabaseConnection db)
                       || r.RequestStatus == RequestStatuses.CancellationRequested)
             select new PlannedVacationDay
             {
+                VacationRequestId = r.VacationRequestId,
                 HolidayType = r.HolidayType,
                 Date = d.Date,
                 Hours = d.Hours
